@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+	<p id="error"></p>
+	<input type="text" id="username" placeholder="Username">
+	<input type="password" id="password" placeholder="Password">
+
+	<!-- login button -->
+	<button id="login">Login</button>
+
+	<!-- signup button! -->
+	<button id="signup">Sign up</button>
+
+	<!-- logout button -->
+	<button id="logout">Logout</button>
+
+	<script>
+		//LOGIN BUTTON FUNCTION
+		// When we click the LOGIN button, we post to the server the username and password
+		$('#login').click(function() {
+			$.post('/api/login', {
+				username: $('#username').val(),
+				password: $('#password').val()
+			}, function(res) {
+				if(res === "success") {
+					// If we are logged in, go back to the frontend
+					document.location = "/";
+				} else {
+					// Otherwise show an error saying that they need to try again.
+					$('#error').text("Username or password was wrong, you are bad at this.");
+				}
+			});
+		});
+
+		//SIGNUP BUTTON FUNCTION
+		$('#signup').click(function() {
+			$.post('/api/signup', {
+				username: $('#username').val(),
+				password: $('#password').val()
+			}, function(res) {
+				if(res === "success") {
+					// If we are logged in, go back to the frontend
+					document.location = "/";
+				} else {
+					// Otherwise show an error saying that they need to try again.
+					$('#error').text("Invalid. Try again.");
+				}
+			});
+		});
+
+		//logout button
+		$('#logout').click(function() {
+			// empty obj = no data sent
+			$.post("/api/logout", {}, function(res) {
+				$('#error').text("You have been logged out");
+			})
+		});
+
+	</script>
+</body>
+</html>

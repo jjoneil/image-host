@@ -1,0 +1,52 @@
+
+Remember to run `npm install` in the terminal to install your dependencies!
+
+
+GET / [DONE]
+	HTML - Homepage & Gallery
+
+GET /login [DONE]
+	HTML - Login Page
+
+GET /upload [DONE]
+	HTML - New Upload Page
+
+GET /image/:id
+	HTML - Show a single image
+	Hint: You'll need to provide some sort of id (maybe just use the array index?) for each image
+	Hint: You'll still need to send an empty HTML page, then get the image using AJAX
+
+---
+
+POST /api/login [DONE]
+	TEXT - log in new user
+
+POST /api/logout [DONE]
+	TEXT - log out current user
+
+GET /api/gallery [DONE]
+	JSON - Gallery listing of images for homepage
+	Optional: (not done!) sort the images by number of votes
+
+
+
+
+POST /api/vote 
+	JSON - Vote for individual image
+	Hint: Somehow figure out how to identify each image, and figure out how to craft a request that votes for that image
+	Hint: Store the number of votes for any image
+	Optional: Make sure each user can only vote once per image
+
+
+
+
+POST /api/signup [DONE]
+	JSON - Create new user account
+	Hint: Create an array of users
+	Hint: You'll have to change login to use an array now
+	Hint: You'll want to check to make sure a user with that username doesn't already exist
+	Hint: Create lots of little helper functions to do these tasks! doesUserExist(name), getUserByName(name)
+
+POST /api/upload [DONE]
+	JSON - Upload new image
+

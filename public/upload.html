@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Upload</title>
+		<script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+	<p id="error"></p>
+	<input id="url" placeholder="url">
+
+	<button id="upload">Upload!</button>
+
+	<script>
+	// When we click the upload button
+	$('#upload').click(function() {
+		// Post to /api/upload and send the new URL of the image we want to upload
+		$.post('/api/upload', {
+			url: $('#url').val()
+		}, function(res) {
+			if (res === "success") {
+				// On successful upload, go back to the gallery homepage
+				document.location = "/";
+			} else {
+				// Show an error message otherwise (maybe a better one than this?)
+				$('#error').text("There was an error, please try again");
+			}
+		});
+	});
+	
+	</script>
+</body>
+</html>

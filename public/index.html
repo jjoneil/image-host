@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script
+  src="https://code.jquery.com/jquery-3.1.1.js"
+  integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+  crossorigin="anonymous"></script>
+</head>
+<body>
+
+	<nav>
+		<a href="/login.html">Log In</a>
+		<a href="/upload.html">Upload</a>
+	</nav>
+	<div id="gallery"></div>
+
+	<script>
+
+	function createClickListener(button, id) {
+	    return function() {
+	        $.post('/vote', {
+	            id: id
+	        }, function (res) {
+	            button.html(res);
+	        });
+	    }
+	}
+	// When this page loads, retrieve the gallery of images from the backend and build them into the HTML
+	$.get('/api/gallery', function(res) {
+		// We have to parse, since we stringified on the backend
+		var images = JSON.parse(res);
+		for (let i = 0; i < images.length; i++) {
+			// for each image...
+			// build a new div
+			var container = $("<div></div>");
+
+			// create an img and paragraph in that div
+			container.append($(`<img src="${images[i].url}">`));
+			container.append("<p>" + images[i].author + "</p>");
+			// push the div into the gallery
+
+			var button = $('<button>' + images[i].vote + "</button>");
+			button.click(createClickListener(button, images[i].id));
+
+			container.append(button);
+			$('#gallery').append(container);
+		}
+	});
+	
+	</script>
+</body>
+</html>
