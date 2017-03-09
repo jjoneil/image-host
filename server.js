@@ -229,7 +229,8 @@ app.post('/api/upload', function(req, res) {
 	// At this point we've passed the "guard clauses", and are allowed to push our image into the array. Note that we get the data for the username from our own req.session -- we don't allow the user to provide this.
 	images.push({
 		url: req.body.url,
-		author: req.session.user
+		author: req.session.user,
+		vote: 0
 		//something about voting
 	});
 
